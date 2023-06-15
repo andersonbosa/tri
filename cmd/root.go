@@ -1,27 +1,22 @@
 /*
 Copyright © 2023 Anderson Bosa
-
 */
 package cmd
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
 )
 
-
-
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "tri",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Tri is a todo application",
+	Long: `Tri will help you get more done in less time.
+It's designed to be as simple as possible to help
+you accomplish your goals.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
@@ -30,8 +25,11 @@ to quickly create a Cobra application.`,
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
+	/* `:=` assignment operator; declares & assigns in one operation */
 	err := rootCmd.Execute()
 	if err != nil {
+		fmt.Println(err)
+		/* err are just values. No exceptions in Go. Errors should be handled when the occur */
 		os.Exit(1)
 	}
 }
@@ -47,5 +45,3 @@ func init() {
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
-
-

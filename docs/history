@@ -1,0 +1,4 @@
+mkdir tri
+cd tri
+go mod init tri
+cobra-cli init -a "Anderson Bosa"
