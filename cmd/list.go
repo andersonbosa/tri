@@ -14,14 +14,13 @@ import (
 // listCmd represents the list command
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "",
-	Long:  ``,
+	Short: "List all todos",
+	Long:  `List will show all todos created`,
 	Run:   listRun,
 }
 
 func listRun(cmd *cobra.Command, args []string) {
 	items, err := todo.ReadItems(todo.TodoFilePath)
-	
 	if err != nil {
 		log.Printf("%v", err)
 	}
