@@ -33,7 +33,7 @@ func addRun(cmd *cobra.Command, args []string) {
 	*/
 	items := []todo.Item{}
 
-	items, err := todo.ReadItems(todo.TodoFilePath)
+	items, err := todo.ReadItems(dataFile)
 	if err != nil {
 		log.Printf("%v", err)
 	}
@@ -42,7 +42,7 @@ func addRun(cmd *cobra.Command, args []string) {
 		items = append(items, todo.Item{Text: value})
 	}
 
-	if todo.SaveItems(todo.TodoFilePath, items) != nil {
+	if todo.SaveItems(dataFile, items) != nil {
 		fmt.Errorf("%v", err)
 	}
 }
