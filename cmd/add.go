@@ -21,31 +21,32 @@ var addCmd = &cobra.Command{
 
 func addRun(cmd *cobra.Command, args []string) {
 	/*
-	* Go does not have constructors
-	* if construction is required (initialization prior to use), use a factory
-	* Convention is to use New____()
-	* or New() WHEN ONLY one type is exported in the package
-	 */
+		- Go does not have constructors
+		- if construction is required (initialization prior to use), use a factory
+		- Convention is to use New____()
+		- or New() WHEN ONLY one type is exported in the package
+	*/
 
-	/* Composite Literals:
-	[]todo.Item{} - an expressions that creats a new value each time it is evaluated
+	/*
+		Composite Literals:
+			- []todo.Item{} - an expressions that creats a new value each time it is evaluated
 	*/
 	items := []todo.Item{}
 
 	for _, value := range args {
 		items = append(items, todo.Item{Text: value})
 	}
-	
-	fmt.Printf("%#v\n",items)
+
+	fmt.Printf("%#v\n", items)
 }
 
 func init() {
 	rootCmd.AddCommand(addCmd)
 
 	/*
-	* special function
-	* called after package variable declarations
-	* each package may have multiple init
-	* init() order un-guaranteed
-	 */
+		- special function
+		- called after package variable declarations
+		- each package may have multiple init
+		- init() order un-guaranteed
+	*/
 }
