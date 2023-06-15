@@ -37,7 +37,7 @@ func addRun(cmd *cobra.Command, args []string) {
 	}
 
 	// fmt.Printf("%#v\n", items)
-	err := todo.SaveItems("~/.tri_todolist.json", items)
+	err := todo.SaveItems(todo.TodoFilePath, items)
 	if err != nil {
 		fmt.Errorf("%v", err)
 	}
