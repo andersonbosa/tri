@@ -2,3 +2,6 @@ mkdir tri
 cd tri
 go mod init tri
 cobra-cli init -a "Anderson Bosa"
+cobra-cli add add
+cobra-cli add list
+go get github.com/mitchellh/go-homedir
