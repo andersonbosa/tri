@@ -1,0 +1,122 @@
+<svg fill="none" viewBox="0 0 800 200" width="800" height="200" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <style>
+        @keyframes rotate {
+          0% {
+            transform: rotate(1deg);
+          }
+
+          100% {
+            transform: rotate(-1deg);
+          }
+        }
+
+        @keyframes rotate2 {
+          0% {
+            transform: rotate(2deg);
+          }
+
+          100% {
+            transform: rotate(-2deg);
+          }
+        }
+
+        @keyframes gradientBackground {
+          0% {
+            background-position: 0% 50%;
+          }
+
+          50% {
+            background-position: 100% 50%;
+          }
+
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        @keyframes fadeIn {
+          0% {
+            opacity: 0;
+          }
+
+          66% {
+            opacity: 0;
+          }
+
+          100% {
+            opacity: 1;
+          }
+        }
+
+        .container {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          margin: 0;
+          width: 100%;
+          height: 200px;
+          gap: 10px;
+
+          font-family:
+            system-ui,
+            -apple-system,
+            'Segoe UI',
+            Roboto,
+            Helvetica,
+            Arial,
+            sans-serif,
+            'Apple Color Emoji',
+            'Segoe UI Emoji';
+
+          background: linear-gradient(-45deg, #137fb1, #00c3ff, #fafad3, #ffffff);
+          background-size: 700% 200%;
+          animation: gradientBackground 8s ease infinite;
+          border-radius: 10px;
+          color: white;
+          text-align: center;
+        }
+
+        h1 {
+          color:#c2c2c2;
+          font-size: 50px;
+          line-height: 1.3;
+          letter-spacing: 5px;
+          text-transform: uppercase;
+          text-shadow:
+            0 1px 0 #efefef,
+            0 2px 0 #efefef,
+            0 3px 0 #efefef,
+            0 4px 0 #efefef,
+            0 12px 5px rgba(0, 0, 0, 0.1);
+        }
+        .logo svg {
+          margin-top: 10px;
+          transform: scale(1.6);
+        }
+
+        .shake {
+          animation: rotate ease-in-out 1s infinite alternate;
+        }
+
+        .shake2 {
+          animation: rotate2 ease-in-out 1s infinite alternate;
+        }
+      </style>
+      <div class="container">
+        <div class="logo shake2">
+          <svg  width="50px" height="50px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- change below. ideias: https://www.svgrepo.com -->
+            <svg  viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#c2c2c2"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M208.352 181.045C219.507 230.206 216.77 281.695 216.77 330.439" stroke="#c2c2c2" stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M218.312 234.578C227.662 225.537 234.599 214.536 244.456 205.944" stroke="#c2c2c2" stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M200.881 213.414C192.967 207.214 184.239 202.548 174.737 198.474" stroke="#c2c2c2" stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M188 263.223C158.116 280.989 133.662 257.201 119.457 227.561C76.7077 138.378 189.746 43.9212 242.006 75.0712C292.867 105.391 317.106 253.592 239.528 263.223" stroke="#c2c2c2" stroke-opacity="0.9" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+          </svg>
+        </div>
+        <div> <p> </p> </div>
+        <div class="title shake">
+          <h1>tri</h1>
+        </div>
+      </div>
+    </div>
+  </foreignObject>
+</svg>
