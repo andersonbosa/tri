@@ -11,9 +11,10 @@ Named types
   - methods can be declared on it
   - not an alias - Explicit type
 */
+
 type Item struct {
-	/* EXPORTED: */
-	Text string
+	Text     string
+	Priority int
 }
 
 var TodoFilePath string = "/tmp/tri_todolist.json"
@@ -44,4 +45,15 @@ func ReadItems(filename string) ([]Item, error) {
 	}
 
 	return items, nil
+}
+
+func (i *Item) SetPriority(priorityLevel int) {
+	switch priorityLevel {
+	case 1:
+		i.Priority = 1
+	case 3:
+		i.Priority = 3
+	default:
+		i.Priority = 2
+	}
 }
