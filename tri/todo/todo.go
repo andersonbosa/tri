@@ -2,6 +2,7 @@ package todo
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 )
 
@@ -12,12 +13,25 @@ Named types
   - not an alias - Explicit type
 */
 
+var TodoFilePath string = "/tmp/tri_todolist.json"
+
 type Item struct {
 	Text     string
 	Priority int
+	position int
 }
 
-var TodoFilePath string = "/tmp/tri_todolist.json"
+func (i *Item) PrettyPriotity() string {
+	if i.Priority == 0 {
+		return " "
+	}
+
+	return fmt.Sprintf("(%d)", i.Priority)
+}
+
+func (i *Item) PrettyPosition() string {
+	return fmt.Sprintf("%d.", i.position)
+}
 
 func SaveItems(filename string, items []Item) error {
 	b, err := json.Marshal(items)
@@ -42,6 +56,10 @@ func ReadItems(filename string) ([]Item, error) {
 	var items []Item
 	if err := json.Unmarshal(b, &items); err != nil {
 		return []Item{}, err
+	}
+
+	for i := range items {
+		items[i].position = i + 1
 	}
 
 	return items, nil
