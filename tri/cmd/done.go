@@ -5,12 +5,41 @@ package cmd
 
 import (
 	"fmt"
+	"log"
+	"sort"
+	"strconv"
+	"tri/todo"
 
 	"github.com/spf13/cobra"
 )
 
 func doneRun(cmd *cobra.Command, args []string) {
-	fmt.Println("done called")
+	items, err := todo.ReadItems(dataFile)
+	i, err := strconv.Atoi(args[0])
+
+	if err != nil {
+		log.Fatalln(args[0], "is not a valid position\n ", err)
+	}
+
+	if i > 0 && i < len(items) {
+
+		/* TODO: move to isolated function */
+		if items[i-1].Done == true {
+			items[i-1].Done = false
+			fmt.Printf("%q %v\n", items[i-1].Text, "marked as TODO")
+
+		} else {
+			items[i-1].Done = true
+			fmt.Printf("%q %v\n", items[i-1].Text, "marked as DONE")
+		}
+
+		sort.Sort(todo.ByPri(items))
+
+		todo.SaveItems(dataFile, items)
+	} else {
+		log.Println(i, "doens't match any items")
+	}
+
 }
 
 // doneCmd represents the done command

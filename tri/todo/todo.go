@@ -19,6 +19,15 @@ type Item struct {
 	Text     string
 	Priority int
 	position int
+	Done     bool
+}
+
+func (i *Item) PrettyDone() string {
+	if i.Done {
+		return "[X]"
+	}
+
+	return "[ ]"
 }
 
 func (i *Item) PrettyPriotity() string {
@@ -38,20 +47,35 @@ func (i *Item) PrettyPosition() string {
 */
 type ByPri []Item
 
+// method that implements the `Len` function of the `sort.Interface`
+// interface for the `ByPri` type, which is a slice of `Item` structs. This method returns the length
+// of the `ByPri` slice, which is the number of elements in the slice. It is used in sorting the slice
+// based on the `Done`, `Priority`, and `position` fields of the `Item` struct.
 func (s ByPri) Len() int {
 	return len(s)
 }
 
+// method that implements the `Swap` function of the `sort.Interface` interface for the `ByPri`
+// type, which is a slice of `Item` structs. This method swaps the `i`th and `j`th elements of the
+// `ByPri` slice. It is used in sorting the slice based on the `Done`, `Priority`, and `position`
+// fields of the `Item` struct.
 func (s ByPri) Swap(i, j int) {
 	s[i], s[j] = s[j], s[i]
 }
 
-func (s ByPri) Less(i int, j int) bool {
-	if s[i].Priority == s[j].Priority {
-		return s[i].position < s[j].position
+// method that implements the `Less` function of the `sort.Interface` interface for the
+// `ByPri` type, which is a slice of `Item` structs. This method defines the sorting order for the
+// `ByPri` slice based on the `Done`, `Priority`, and `position` fields of the `Item` struct.
+func (s ByPri) Less(i, j int) bool {
+	if s[i].Done == s[j].Done {
+		if s[i].Priority == s[j].Priority {
+			return s[i].position < s[j].position
+		}
+
+		return s[i].Priority < s[j].Priority
 	}
 
-	return s[i].Priority < s[j].Priority
+	return !s[i].Done
 }
 
 func SaveItems(filename string, items []Item) error {

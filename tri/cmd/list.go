@@ -14,11 +14,23 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var (
+	doneOpt bool
+	allOpt  bool
+)
+
 func parsePrettyLine(item todo.Item) string {
 	// return strconv.Itoa(item.Priority) + "\t" + item.Text + "\t"
 	delimiter := "\t"
 
-	return item.PrettyPosition() + delimiter + item.PrettyPriotity() + delimiter + item.Text + delimiter
+	return item.PrettyPosition() +
+		delimiter +
+		item.PrettyDone() +
+		delimiter +
+		item.PrettyPriotity() +
+		delimiter +
+		item.Text +
+		delimiter
 }
 
 func listRun(cmd *cobra.Command, args []string) {
@@ -26,14 +38,21 @@ func listRun(cmd *cobra.Command, args []string) {
 	if err != nil {
 		log.Printf("%v", err)
 	}
-	
+
 	sort.Sort(todo.ByPri(items))
-	
+
 	w := tabwriter.NewWriter(os.Stdout, 3, 0, 1, ' ', 0)
+
 	for _, item := range items {
-		prettyLine := parsePrettyLine(item)
+		var prettyLine string
+
+		if allOpt || item.Done == doneOpt {
+			prettyLine = parsePrettyLine(item)
+		}
+
 		fmt.Fprintln(w, prettyLine)
 	}
+
 	w.Flush()
 }
 
@@ -49,6 +68,8 @@ func init() {
 	rootCmd.AddCommand(listCmd)
 
 	// Here you will define your flags and configuration settings.
+	listCmd.Flags().BoolVar(&doneOpt, "done", false, "Show 'Done' Todos")
+	listCmd.Flags().BoolVar(&allOpt, "all", false, "Show all todos")
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
