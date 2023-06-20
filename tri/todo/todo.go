@@ -33,6 +33,27 @@ func (i *Item) PrettyPosition() string {
 	return fmt.Sprintf("%d.", i.position)
 }
 
+/*
+- ByPri implements sorte.Interface for []Item based on the Priority & position field
+*/
+type ByPri []Item
+
+func (s ByPri) Len() int {
+	return len(s)
+}
+
+func (s ByPri) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+func (s ByPri) Less(i int, j int) bool {
+	if s[i].Priority == s[j].Priority {
+		return s[i].position < s[j].position
+	}
+
+	return s[i].Priority < s[j].Priority
+}
+
 func SaveItems(filename string, items []Item) error {
 	b, err := json.Marshal(items)
 	if err != nil {

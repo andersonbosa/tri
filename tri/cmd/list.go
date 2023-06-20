@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
 	"text/tabwriter"
 	"tri/todo"
 
@@ -25,7 +26,9 @@ func listRun(cmd *cobra.Command, args []string) {
 	if err != nil {
 		log.Printf("%v", err)
 	}
-
+	
+	sort.Sort(todo.ByPri(items))
+	
 	w := tabwriter.NewWriter(os.Stdout, 3, 0, 1, ' ', 0)
 	for _, item := range items {
 		prettyLine := parsePrettyLine(item)

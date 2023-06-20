@@ -49,7 +49,7 @@ func addRun(cmd *cobra.Command, args []string) {
 	}
 
 	if todo.SaveItems(dataFile, items) != nil {
-		fmt.Errorf("%v", err)
+		_ = fmt.Errorf("%v", err)
 	}
 }
 
