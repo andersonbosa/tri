@@ -10,6 +10,7 @@
   <p>
     <a href="#about">About</a> •
     <a href="#technologies">Technologies</a> •
+    <a href="#getting-started">Getting Started</a> •
     <a href="#contribution">Contribution</a> •
     <a href="#license">License</a>
   </p>
@@ -34,14 +35,54 @@ Building a Todo application in Go using Cobra
 
 <h2 id="technologies"> 🛠️ Technologies</h2>
 
-
 - [Go language](https://go.dev/)
 - [Cobra](https://github.com/spf13/cobra)
 - [Viper](https://github.com/spf13/viper)
 
+<h2 id="getting-started"> 🟢 Getting Started </h2>
+
+### Installation
+
+```bash
+# download latest version
+wget -L https://github.com/andersonbosa/tri/raw/main/tri/tri -O $HOME/.local/bin/tri
+
+# give executino permission
+chmod +x $HOME/.local/bin/tri
+
+# validate instalation
+tri --help
+```
+
+### Usage
+
+#### Help message
+
+```
+Tri will help you get more done in less time.
+It's designed to be as simple as possible to help
+you accomplish your goals.
+
+Usage:
+  tri [command]
+
+Available Commands:
+  add         Add a new todo
+  done        Mark item as Done
+  help        Help about any command
+  list        List all todos
+
+Flags:
+      --config string     config file (default is $HOME/.tri.yml)
+      --datafile string   data file to store todos (default "/home/t4inha/.tri_todo.json")
+  -h, --help              help for tri
+
+Use "tri [command] --help" for more information about a command.
+```
+
 <h2>🚀 Deploy</h2>
 
-* Distributed here, in [Github](https://github.com/andersonbosa/dothub)
+* Distributed here, in [Github](https://github.com/andersonbosa/tri/releases)
 
 <h2 id="contribution">🤝 Contribution</h2>
 
