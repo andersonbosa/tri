@@ -13,8 +13,6 @@ Named types
   - not an alias - Explicit type
 */
 
-var TodoFilePath string = "/tmp/tri_todolist.json"
-
 type Item struct {
 	Text     string
 	Priority int

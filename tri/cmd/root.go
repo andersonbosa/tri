@@ -10,8 +10,10 @@ import (
 
 	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
+var cfgFile string
 var dataFile string
 
 // rootCmd represents the base command when called without any subcommands
@@ -49,14 +51,38 @@ func init() {
 	// when this action is called directly.
 	// rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
+	cobra.OnInitialize(initConfig)
+
 	home, err := homedir.Dir()
 	if err != nil {
 		log.Println("Unable to detect home directory. Please set data file using --data-file")
 	}
+
 	rootCmd.PersistentFlags().StringVar(
 		&dataFile,
-		"data-file",
-		home+string(os.PathSeparator)+"tri_todo.json",
+		"datafile",
+		home+string(os.PathSeparator)+".tri_todo.json",
 		"data file to store todos",
 	)
+
+	rootCmd.PersistentFlags().StringVar(
+		&cfgFile, "config", "", "config file (default is $HOME/.tri.yml)",
+	)
+}
+
+// This function initializes the configuration settings for a Go program using Viper.
+func initConfig() {
+	if cfgFile != "" {
+		viper.SetConfigFile(cfgFile)
+	}
+
+	viper.SetConfigName(".tri")
+	viper.AddConfigPath("$HOME")
+	viper.AutomaticEnv()
+	viper.SetEnvPrefix("tri")
+
+	/* Read config file if is found */
+	if err := viper.ReadInConfig(); err == nil {
+		fmt.Println("Using configuration from file: ", viper.ConfigFileUsed())
+	}
 }

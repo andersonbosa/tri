@@ -9,6 +9,7 @@ import (
 	"tri/todo"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 /* Flags pointers */
@@ -22,21 +23,20 @@ var addCmd = &cobra.Command{
 	Run:   addRun,
 }
 
+/*
+	- Go does not have constructors
+	- if construction is required (initialization prior to use), use a factory
+	- Convention is to use New____()
+	- or New() WHEN ONLY one type is exported in the package
+*/
+/*
+	Composite Literals:
+		- []todo.Item{} - an expressions that creats a new value each time it is evaluated
+*/
 func addRun(cmd *cobra.Command, args []string) {
-	/*
-		- Go does not have constructors
-		- if construction is required (initialization prior to use), use a factory
-		- Convention is to use New____()
-		- or New() WHEN ONLY one type is exported in the package
-	*/
-
-	/*
-		Composite Literals:
-			- []todo.Item{} - an expressions that creats a new value each time it is evaluated
-	*/
 	items := []todo.Item{}
 
-	items, err := todo.ReadItems(dataFile)
+	items, err := todo.ReadItems(viper.GetString("datafile"))
 	if err != nil {
 		log.Printf("%v", err)
 	}
@@ -48,7 +48,7 @@ func addRun(cmd *cobra.Command, args []string) {
 		items = append(items, newItem)
 	}
 
-	if todo.SaveItems(dataFile, items) != nil {
+	if todo.SaveItems(viper.GetString("datafile"), items) != nil {
 		_ = fmt.Errorf("%v", err)
 	}
 }

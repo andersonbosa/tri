@@ -11,10 +11,11 @@ import (
 	"tri/todo"
 
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 func doneRun(cmd *cobra.Command, args []string) {
-	items, err := todo.ReadItems(dataFile)
+	items, err := todo.ReadItems(viper.GetString("datafile"))
 	i, err := strconv.Atoi(args[0])
 
 	if err != nil {
@@ -35,7 +36,7 @@ func doneRun(cmd *cobra.Command, args []string) {
 
 		sort.Sort(todo.ByPri(items))
 
-		todo.SaveItems(dataFile, items)
+		todo.SaveItems(viper.GetString("datafile"), items)
 	} else {
 		log.Println(i, "doens't match any items")
 	}
