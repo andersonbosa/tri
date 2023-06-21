@@ -47,7 +47,7 @@ Building a Todo application in Go using Cobra
 # download latest version
 wget -L https://github.com/andersonbosa/tri/raw/main/tri/tri -O $HOME/.local/bin/tri
 
-# give executino permission
+# give execution permission
 chmod +x $HOME/.local/bin/tri
 
 # validate instalation
